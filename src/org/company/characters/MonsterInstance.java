@@ -1,7 +1,7 @@
-package com.company.characters;
+package org.company.characters;
 
-import com.company.items.clothing.ClothingInstance;
-import com.company.items.weapons.WeaponInstance;
+import org.company.items.clothing.ClothingInstance;
+import org.company.items.weapons.WeaponInstance;
 
 public class MonsterInstance {
     public static Monster[] all() {

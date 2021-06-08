@@ -1,14 +1,14 @@
-package com.company.items.weapons;
+package org.company.items.weapons;
 
-import com.company.items.weapons.axes.BroadAxe;
-import com.company.items.weapons.axes.MediumAxe;
-import com.company.items.weapons.axes.SmallAxe;
-import com.company.items.weapons.bows.CompositeBow;
-import com.company.items.weapons.bows.LongBow;
-import com.company.items.weapons.bows.ShortBow;
-import com.company.items.weapons.swords.Dagger;
-import com.company.items.weapons.swords.LongSword;
-import com.company.items.weapons.swords.ShortSword;
+import org.company.items.weapons.axes.BroadAxe;
+import org.company.items.weapons.axes.MediumAxe;
+import org.company.items.weapons.axes.SmallAxe;
+import org.company.items.weapons.bows.CompositeBow;
+import org.company.items.weapons.bows.LongBow;
+import org.company.items.weapons.bows.ShortBow;
+import org.company.items.weapons.swords.Dagger;
+import org.company.items.weapons.swords.LongSword;
+import org.company.items.weapons.swords.ShortSword;
 
 public class WeaponInstance {
     public static Weapon[] all() {

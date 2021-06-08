@@ -1,10 +1,10 @@
-package com.company;
+package org.company;
 
-import com.company.characters.Monster;
-import com.company.characters.MonsterInstance;
-import com.company.characters.Townspeople;
-import com.company.items.clothing.ClothingInstance;
-import com.company.items.weapons.WeaponInstance;
+import org.company.characters.Monster;
+import org.company.characters.MonsterInstance;
+import org.company.characters.Townspeople;
+import org.company.items.clothing.ClothingInstance;
+import org.company.items.weapons.WeaponInstance;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

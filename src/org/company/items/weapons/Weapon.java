@@ -1,6 +1,6 @@
-package com.company.items.weapons;
+package org.company.items.weapons;
 
-import com.company.items.Item;
+import org.company.items.Item;
 
 public abstract class Weapon extends Item {
     private final int damage;

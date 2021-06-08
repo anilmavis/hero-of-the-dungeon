@@ -1,4 +1,4 @@
-package com.company.items.clothing;
+package org.company.items.clothing;
 
 public class ClothingInstance {
     public static Clothing[] all() {

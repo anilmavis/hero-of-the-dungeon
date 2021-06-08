@@ -1,8 +1,8 @@
-package com.company.characters;
+package org.company.characters;
 
-import com.company.Door;
-import com.company.items.clothing.Clothing;
-import com.company.items.weapons.Weapon;
+import org.company.Door;
+import org.company.items.clothing.Clothing;
+import org.company.items.weapons.Weapon;
 
 public class Townspeople extends Character {
     public Townspeople(String name, Weapon weapon, Clothing clothing, int hitPoints) {

@@ -1,9 +1,9 @@
 package org.company;
 
-import com.company.characters.Hero;
-import com.company.characters.Monster;
-import com.company.items.clothing.ClothingInstance;
-import com.company.items.weapons.WeaponInstance;
+import org.company.characters.Hero;
+import org.company.characters.Monster;
+import org.company.items.clothing.ClothingInstance;
+import org.company.items.weapons.WeaponInstance;
 
 import java.util.ArrayList;
 import java.util.Scanner;

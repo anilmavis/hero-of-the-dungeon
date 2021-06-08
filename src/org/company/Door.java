@@ -1,4 +1,4 @@
-package com.company;
+package org.company;
 
 public class Door {
     private final int reference;

@@ -1,4 +1,4 @@
-package com.company.items;
+package org.company.items;
 
 public class Item {
     private final String name;

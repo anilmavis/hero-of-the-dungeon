@@ -1,4 +1,4 @@
-package com.company.items.clothing;
+package org.company.items.clothing;
 
 public class LeatherArmour extends Clothing {
     public LeatherArmour(String name, int weight, int value) {

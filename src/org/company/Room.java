@@ -1,7 +1,7 @@
 package org.company;
 
-import com.company.characters.Monster;
-import com.company.characters.Townspeople;
+import org.company.characters.Monster;
+import org.company.characters.Townspeople;
 
 import java.util.ArrayList;
 

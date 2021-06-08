@@ -1,6 +1,6 @@
-package com.company.items.clothing;
+package org.company.items.clothing;
 
-import com.company.items.Item;
+import org.company.items.Item;
 
 public abstract class Clothing extends Item {
     private final int protection;
