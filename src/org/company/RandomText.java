@@ -16,7 +16,7 @@ public class RandomText {
         objects.add("corpse");
 
         for (int i = 0; i < 5; i++) {
-            texts.add("This room is filled with " + (i % 2 == 0 ? "big " : "small ") + objects.get(i) + "s.");
+            texts.add("this room is filled with " + (i % 2 == 0 ? "big " : "small ") + objects.get(i) + "s.");
         }
 
         for (int i = 0; i < 5; i++) {
@@ -24,11 +24,11 @@ public class RandomText {
         }
 
         for (int i = 0; i < 5; i++) {
-            texts.add("be careful about " + objects.get(i) + "s.");
+            texts.add("be careful about " + (i % 2 == 0 ? "black " : "white ") + objects.get(i) + "s.");
         }
 
         for (int i = 0; i < 5; i++) {
-            texts.add("there are lots of " + objects.get(i) + "s.");
+            texts.add("there are lots of " + (i % 2 == 0 ? "red " : "blue ") + objects.get(i) + "s.");
         }
 
         for (int i = 0; i < 5; i++) {
@@ -42,14 +42,14 @@ public class RandomText {
         texts.add("there is nothing in this room.");
     }
 
-    public String get(boolean isFirstRoom) {
+    public String next(boolean isFirstRoom) {
         SecureRandom secureRandom = new SecureRandom();
         if (isFirstRoom) {
-            return "This room receives beams of sunlight from the stairs that connect the dungeons to the town.";
+            return "This room receives beams of sunlight from the stairs that connect the dungeons to the town.\noptions:\nattack <monster number>\nmove <door number>\nhelp";
         }
         return texts.get(secureRandom.nextInt(texts.size()));
     }
-    public String get() {
-        return get(false);
+    public String next() {
+        return next(false);
     }
 }

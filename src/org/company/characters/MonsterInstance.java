@@ -5,7 +5,10 @@ import org.company.items.weapons.WeaponInstance;
 
 public class MonsterInstance {
     public static Monster[] all() {
-        return new Monster[] { ape(), };
+        return new Monster[] {
+                ape(), bandit(), beast(),
+                birdPerson(), blackGuard(), hannibal(),
+        };
     }
 
     public static Monster ape() {

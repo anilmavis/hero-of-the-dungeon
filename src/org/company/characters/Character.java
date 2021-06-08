@@ -1,6 +1,7 @@
 package org.company.characters;
 
 import org.company.Door;
+import org.company.Inventory;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
@@ -10,12 +11,22 @@ public abstract class Character {
     private Clothing clothing;
     private int hitPoints;
     private boolean isDead;
+    private final Inventory inventory;
+
+    public Character(String name, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize) {
+        this.name = name;
+        this.weapon = weapon;
+        this.clothing = clothing;
+        this.hitPoints = hitPoints;
+        inventory = new Inventory(inventorySize);
+    }
 
     public Character(String name, Weapon weapon, Clothing clothing, int hitPoints) {
         this.name = name;
         this.weapon = weapon;
         this.clothing = clothing;
         this.hitPoints = hitPoints;
+        inventory = new Inventory(100);
     }
 
     public String getName() {
@@ -54,7 +65,23 @@ public abstract class Character {
         isDead = dead;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     public abstract void move(Door door);
+
+    public void die() {
+        setDead(true);
+    }
+
+    public void takeDamage(int damage) {
+        if (hitPoints < 1) {
+            die();
+        } else {
+            hitPoints -= damage;
+        }
+    }
 
     public abstract void attack(Character character);
 

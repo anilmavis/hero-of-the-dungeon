@@ -2,6 +2,7 @@ package org.company;
 
 import org.company.characters.Monster;
 import org.company.characters.Townspeople;
+import org.company.items.Item;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class Room {
     private final ArrayList<Door> doors;
     private final ArrayList<Monster> monsters;
     private final ArrayList<Townspeople> townspeople;
+    private final ArrayList<Item> items;
 
     public Room(int id, int corridor, String text, ArrayList<Door> doors, ArrayList<Monster> monsters, ArrayList<Townspeople> townspeople) {
         this.id = id;
@@ -20,6 +22,7 @@ public class Room {
         this.doors = doors;
         this.monsters = monsters;
         this.townspeople = townspeople;
+        this.items = new ArrayList<>();
     }
 
     public int getId() {
@@ -48,6 +51,10 @@ public class Room {
 
     public ArrayList<Townspeople> getTownspeople() {
         return townspeople;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public void display() {

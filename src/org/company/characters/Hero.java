@@ -8,8 +8,8 @@ public class Hero extends Character {
     private int levelId;
     private int roomId;
 
-    public Hero(String name, Weapon weapon, Clothing clothing, int hitPoints) {
-        super(name, weapon, clothing, hitPoints);
+    public Hero(String name, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize) {
+        super(name, weapon, clothing, hitPoints, inventorySize);
     }
 
     public int getLevelId() {
@@ -37,9 +37,9 @@ public class Hero extends Character {
 
     @Override
     public void attack(Character character) {
-        character.setHitPoints(character.getHitPoints() - getWeapon().getDamage());
-        character.attack(this);
-        System.out.println("the hero causes " + getWeapon().getDamage() + " hit points damage to m1, the monster fights back and does " + character.getWeapon().getDamage() + " hit points damage");
+        character.takeDamage(getWeapon().getDamage());
+        takeDamage(character.getWeapon().getDamage());
+        System.out.println("the hero causes " + getWeapon().getDamage() + " hit points damage to " + character.getName());
     }
 
     @Override

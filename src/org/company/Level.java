@@ -68,14 +68,14 @@ public class Level {
                     ArrayList<Townspeople> townspeople = new ArrayList<>();
 
                     for (int number = 0; number < x / 3; number++) {
-                        townspeople.add(new Townspeople("townspeople", WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), 10));
+                        townspeople.add(new Townspeople("townspeople", WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), 10, 100));
                     }
                     String text;
 
                     if (levelId == 0 && roomId == 0) {
-                        text = new RandomText().get(true);
+                        text = new RandomText().next(true);
                     } else {
-                        text = new RandomText().get();
+                        text = new RandomText().next();
                     }
                     rooms.add(new Room(roomId++, i, text, doors, monsters, townspeople));
                 }
