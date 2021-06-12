@@ -26,7 +26,7 @@ public abstract class Character {
         this.weapon = weapon;
         this.clothing = clothing;
         this.hitPoints = hitPoints;
-        inventory = new Inventory(100);
+        inventory = new Inventory(1000);
     }
 
     public String getName() {
@@ -75,11 +75,13 @@ public abstract class Character {
         setDead(true);
     }
 
-    public void takeDamage(int damage) {
+    public boolean takeDamage(int damage) {
         if (hitPoints < 1) {
             die();
+            return false;
         } else {
             hitPoints -= damage;
+            return true;
         }
     }
 
@@ -88,6 +90,6 @@ public abstract class Character {
     public abstract void block();
 
     public void display() {
-        System.out.println(getClass().getSimpleName() + " " + name + ", " + hitPoints + " hit points, " + weapon.getName() + ", " + clothing.getName());
+        System.out.printf("%s %s, %d hit points, %s, %s%n", getClass().getSimpleName(), getName(), getHitPoints(), getWeapon().getName(), getClothing().getName());
     }
 }

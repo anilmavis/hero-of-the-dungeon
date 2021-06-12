@@ -28,4 +28,11 @@ public class Inventory {
     public void dropItem(Item item, Room room) {
         room.getItems().add(item);
     }
+
+    public void display() {
+        for (Item item :
+                items) {
+            item.display();
+        }
+    }
 }

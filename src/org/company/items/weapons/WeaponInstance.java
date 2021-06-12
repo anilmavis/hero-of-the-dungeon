@@ -28,110 +28,110 @@ public class WeaponInstance {
     }
 
     public static Dagger glassShank() {
-        return new Dagger("glass shank", 1, 1, 1);
+        return new Dagger("glass shank", 100, 1, 1);
     }
 
     public static Dagger skinningKnife() {
-        return new Dagger("skinning knife", 2, 2, 2);
+        return new Dagger("skinning knife", 200, 2, 2);
     }
 
     public static Dagger stiletto() {
-        return new Dagger("stiletto", 3, 3, 3);
+        return new Dagger("stiletto", 3, 300, 3);
     }
 
     public static ShortSword rustedSword() {
-        return new ShortSword("rusted sword", 1, 1, 1);
+        return new ShortSword("rusted sword", 100, 1, 1);
     }
 
     public static ShortSword copperSword() {
-        return new ShortSword("copper sword", 2, 2, 2);
+        return new ShortSword("copper sword", 200, 2, 2);
     }
 
     public static ShortSword sabre() {
-        return new ShortSword("sabre", 3, 3, 3);
+        return new ShortSword("sabre", 3, 300, 3);
     }
 
     public static LongSword broadSword() {
-        return new LongSword("broad sword", 1, 1, 1);
+        return new LongSword("broad sword", 100, 1, 1);
     }
 
     public static LongSword warSword() {
-        return new LongSword("war sword", 2, 2, 2);
+        return new LongSword("war sword", 200, 2, 2);
     }
 
     public static LongSword ancientSword() {
-        return new LongSword("ancient sword", 3, 3, 3);
+        return new LongSword("ancient sword", 300, 3, 3);
     }
 
     public static SmallAxe rustedHatchet() {
-        return new SmallAxe("rusted hatchet", 1, 1, 1);
+        return new SmallAxe("rusted hatchet", 100, 1, 1);
     }
 
     public static SmallAxe jadeHatchet() {
-        return new SmallAxe("jade hatchet", 2, 2, 2);
+        return new SmallAxe("jade hatchet", 200, 2, 2);
     }
 
     public static SmallAxe boardingAxe() {
-        return new SmallAxe("boarding axe", 3, 3, 3);
+        return new SmallAxe("boarding axe", 300, 3, 3);
     }
 
     public static MediumAxe stoneAxe() {
-        return new MediumAxe("stone axe", 1, 1, 1);
+        return new MediumAxe("stone axe", 100, 1, 1);
     }
 
     public static MediumAxe jadeChopper() {
-        return new MediumAxe("jade chopper", 2, 2, 2);
+        return new MediumAxe("jade chopper", 200, 2, 2);
     }
 
     public static MediumAxe woodSplitter() {
-        return new MediumAxe("wood splitter", 3, 3, 3);
+        return new MediumAxe("wood splitter", 300, 3, 3);
     }
 
     public static BroadAxe poleAxe() {
-        return new BroadAxe("pole axe", 1, 1, 1);
+        return new BroadAxe("pole axe", 100, 1, 1);
     }
 
     public static BroadAxe doubleAxe() {
-        return new BroadAxe("double axe", 2, 2, 2);
+        return new BroadAxe("double axe", 200, 2, 2);
     }
 
     public static BroadAxe gildedAxe() {
-        return new BroadAxe("gilded axe", 3, 3, 3);
+        return new BroadAxe("gilded axe", 300, 3, 3);
     }
 
     public static ShortBow crudeBow() {
-        return new ShortBow("crude bow", 1, 1, 1);
+        return new ShortBow("crude bow", 100, 1, 1);
     }
 
     public static ShortBow recurveBow() {
-        return new ShortBow("recurve bow", 2, 2, 2);
+        return new ShortBow("recurve bow", 200, 2, 2);
     }
 
     public static ShortBow boneBow() {
-        return new ShortBow("bone bow", 1, 1, 3);
+        return new ShortBow("bone bow", 100, 1, 3);
     }
 
     public static LongBow royalBow() {
-        return new LongBow("royal bow", 2, 2, 1);
+        return new LongBow("royal bow", 200, 2, 1);
     }
 
     public static LongBow deathBow() {
-        return new LongBow("death bow", 3, 3, 2);
+        return new LongBow("death bow", 300, 3, 2);
     }
 
     public static LongBow groveBow() {
-        return new LongBow("grove bow", 1, 0, 3);
+        return new LongBow("grove bow", 100, 0, 3);
     }
 
     public static CompositeBow reflexBow() {
-        return new CompositeBow("reflex bow", 1, 1, 1);
+        return new CompositeBow("reflex bow", 100, 1, 1);
     }
 
     public static CompositeBow compoundBow() {
-        return new CompositeBow("compound bow", 2, 2, 2);
+        return new CompositeBow("compound bow", 200, 2, 2);
     }
 
     public static CompositeBow sniperBow() {
-        return new CompositeBow("sniper bow", 3, 3, 3);
+        return new CompositeBow("sniper bow", 300, 3, 3);
     }
 }

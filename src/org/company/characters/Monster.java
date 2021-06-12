@@ -1,13 +1,33 @@
 package org.company.characters;
 
 import org.company.Door;
+import org.company.Level;
+import org.company.Room;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 public class Monster extends Character {
+    private Room room;
+    private Level level;
 
-    public Monster(String name, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize) {
-        super(name, weapon, clothing, hitPoints, inventorySize);
+    public Monster(String name, Weapon weapon, Clothing clothing, int hitPoints) {
+        super(name, weapon, clothing, hitPoints);
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     @Override
@@ -16,11 +36,6 @@ public class Monster extends Character {
 
     @Override
     public void attack(Character character) {
-        if (getHitPoints() < 1) {
-            setDead(true);
-        }
-        character.setHitPoints(character.getHitPoints() - getWeapon().getDamage());
-        System.out.println("the monster fights back and does " + character.getWeapon().getDamage() + " hit points damage");
     }
 
     @Override

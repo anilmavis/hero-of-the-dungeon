@@ -2,7 +2,7 @@ package org.company;
 
 import org.company.characters.Monster;
 import org.company.characters.MonsterInstance;
-import org.company.characters.Townspeople;
+import org.company.characters.townspeople.Townspeople;
 import org.company.items.clothing.ClothingInstance;
 import org.company.items.weapons.WeaponInstance;
 
@@ -50,15 +50,6 @@ public class Level {
 
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
-                    ArrayList<Door> doors = new ArrayList<>();
-
-                    if (j != 0) {
-                        doors.add(new Door(roomId - 1));
-                    }
-
-                    if (j != n - 1) {
-                        doors.add(new Door(roomId + 1));
-                    }
                     ArrayList<Monster> monsters = new ArrayList<>();
                     int x = secureRandom.nextInt(9) + 1;
 
@@ -70,14 +61,27 @@ public class Level {
                     for (int number = 0; number < x / 3; number++) {
                         townspeople.add(new Townspeople("townspeople", WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), 10, 100));
                     }
-                    String text;
-
-                    if (levelId == 0 && roomId == 0) {
-                        text = new RandomText().next(true);
-                    } else {
-                        text = new RandomText().next();
+                    Room room = new Room(roomId, i, levelId == 0 && roomId == 0 ? new RandomText().next(true) : new RandomText().next(), monsters, townspeople);
+                    rooms.add(room);
+                    for (Monster monster : monsters) {
+                        monster.setRoom(room);
                     }
-                    rooms.add(new Room(roomId++, i, text, doors, monsters, townspeople));
+                    roomId++;
+                }
+            }
+            roomId = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    ArrayList<Door> doors = new ArrayList<>();
+                    if (j != 0) {
+                        doors.add(new Door(rooms.get(roomId - 1)));
+                    }
+
+                    if (j != n - 1) {
+                        doors.add(new Door(rooms.get(roomId + 1)));
+                    }
+                    rooms.get(roomId).setDoors(doors);
+                    roomId++;
                 }
             }
 
@@ -85,9 +89,9 @@ public class Level {
                 if (i != m - 1) {
                     int j = secureRandom.nextInt(n);
                     int k = secureRandom.nextInt(n);
-                    System.out.println(j + ", " + k);
-                    rooms.get(i * n + j).addDoor(new Door((i + 1) * n + k));
-                    rooms.get((i + 1) * n + k).addDoor(new Door(i * n + j));
+                    System.out.printf("%d, %d%n", j, k);
+                    rooms.get(i * n + j).addDoor(new Door(rooms.get((i + 1) * n + k)));
+                    rooms.get((i + 1) * n + k).addDoor(new Door(rooms.get(i * n + j)));
                 }
             }
             levels.add(new Level(m, n, rooms));
@@ -102,8 +106,8 @@ public class Level {
                 int b1 = secureRandom.nextInt(n1);
                 int a2 = secureRandom.nextInt(m2);
                 int b2 = secureRandom.nextInt(n2);
-                levels.get(i).getRooms().get(a1 * n1 + b1).addDoor(new Door(a2 * n2 + b2, "up"));
-                levels.get(i + 1).getRooms().get(a2 * n2 + b2).addDoor(new Door(a1 * n1 + b1, "down"));
+                levels.get(i).getRooms().get(a1 * n1 + b1).addDoor(new Door(levels.get(i + 1).getRooms().get(a2 * n2 + b2), levels.get(i + 1)));
+                levels.get(i + 1).getRooms().get(a2 * n2 + b2).addDoor(new Door(levels.get(i).getRooms().get(a1 * n1 + b1), levels.get(i)));
             }
         }
         print(levels);
@@ -120,13 +124,13 @@ public class Level {
 
                 for (int i = 0; i < doors.size(); i++) {
                     if (!doors.get(i).isStair()) {
-                        System.out.println("        door (d" + (i + 1) + ")");
+                        System.out.printf("        door (d%d), room %d%n", i + 1, doors.get(i).getRoom().getId() + 1);
                     }
                 }
 
                 for (int i = 0; i < doors.size(); i++) {
                     if (doors.get(i).isStair()) {
-                        System.out.println("        stair (" + doors.get(i).getWay() + ") (room " + (doors.get(i).getReference() + 1) + ")");
+                        System.out.printf("        stair (s%d), level %d%n", i + 1, doors.get(i).getLevel().getId() + 1);
                     }
                 }
             }

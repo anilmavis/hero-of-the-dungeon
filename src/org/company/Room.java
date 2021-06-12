@@ -1,7 +1,7 @@
 package org.company;
 
 import org.company.characters.Monster;
-import org.company.characters.Townspeople;
+import org.company.characters.townspeople.Townspeople;
 import org.company.items.Item;
 
 import java.util.ArrayList;
@@ -10,19 +10,18 @@ public class Room {
     private final int id;
     private final int corridor;
     private final String text;
-    private final ArrayList<Door> doors;
+    private ArrayList<Door> doors;
     private final ArrayList<Monster> monsters;
     private final ArrayList<Townspeople> townspeople;
     private final ArrayList<Item> items;
 
-    public Room(int id, int corridor, String text, ArrayList<Door> doors, ArrayList<Monster> monsters, ArrayList<Townspeople> townspeople) {
+    public Room(int id, int corridor, String text, ArrayList<Monster> monsters, ArrayList<Townspeople> townspeople) {
         this.id = id;
         this.corridor = corridor;
         this.text = text;
-        this.doors = doors;
+        this.items = new ArrayList<>();
         this.monsters = monsters;
         this.townspeople = townspeople;
-        this.items = new ArrayList<>();
     }
 
     public int getId() {
@@ -39,6 +38,10 @@ public class Room {
 
     public ArrayList<Door> getDoors() {
         return doors;
+    }
+
+    public void setDoors(ArrayList<Door> doors) {
+        this.doors = doors;
     }
 
     public void addDoor(Door door) {
@@ -58,20 +61,24 @@ public class Room {
     }
 
     public void display() {
-        System.out.println(text + "\nthe hero sees the following");
+        System.out.printf("%s%nThe hero sees the following.%n", text);
 
         for (int i = 0; i < doors.size(); i++) {
-            System.out.println(doors.get(i).isStair() ? "stair (" + doors.get(i).getWay() : "door (" + (i + 1) + ")");
+            System.out.printf((doors.get(i).isStair() ? "stair" : "door") + " (d%d)%n", i + 1);
         }
 
         for (int i = 0; i < monsters.size(); i++) {
             if (!monsters.get(i).isDead()) {
-                System.out.println("monster (m" + (i + 1) + ")");
+                System.out.printf("monster (m%d)%n", i + 1);
             }
         }
 
-        for (int i = 1; i <= townspeople.size(); i++) {
-            System.out.println(i + " townspeople (t" + i + ")");
+        for (int i = 0; i < townspeople.size(); i++) {
+            System.out.printf("townspeople (t%d)%n", i + 1);
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            System.out.printf("%s (i%d)%n", items.get(i).getName(), i + 1);
         }
     }
 }

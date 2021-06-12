@@ -1,6 +1,7 @@
-package org.company.characters;
+package org.company.characters.townspeople;
 
 import org.company.Door;
+import org.company.characters.Character;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 

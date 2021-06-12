@@ -1,29 +1,29 @@
 package org.company;
 
 public class Door {
-    private final int reference;
-    private final String way;
+    private final Room room;
+    private final Level level;
     private final boolean isStair;
 
-    public Door(int reference, String way) {
-        this.reference = reference;
-        this.way = way;
-        this.isStair = !way.isEmpty();
+    public Door(Room room, Level level) {
+        this.room = room;
+        this.level = level;
+        isStair = level != null;
     }
 
-    public Door(int reference) {
-        this(reference, "");
+    public Door(Room room) {
+        this(room, null);
     }
 
-    public int getReference() {
-        return reference;
+    public Room getRoom() {
+        return room;
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     public boolean isStair() {
         return isStair;
-    }
-
-    public String getWay() {
-        return way;
     }
 }

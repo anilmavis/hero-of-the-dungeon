@@ -22,4 +22,8 @@ public class Item {
     public int getValue() {
         return value;
     }
+
+    public void display() {
+        System.out.printf("%s, %d grams, %d rarity%n", name, weight, value);
+    }
 }
