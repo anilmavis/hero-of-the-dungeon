@@ -15,7 +15,8 @@ public class Townspeople extends Character {
     }
 
     @Override
-    public void attack(Character character) {
+    public boolean attack(Character character) {
+        return true;
     }
 
     @Override

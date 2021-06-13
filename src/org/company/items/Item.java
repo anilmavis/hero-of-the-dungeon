@@ -23,7 +23,8 @@ public class Item {
         return value;
     }
 
-    public void display() {
-        System.out.printf("%s, %d grams, %d rarity%n", name, weight, value);
+    @Override
+    public String toString() {
+        return String.format("%s, %d g, %d value", name, weight, value);
     }
 }

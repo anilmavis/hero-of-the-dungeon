@@ -81,15 +81,17 @@ public class Hero extends Character {
     }
 
     @Override
-    public void attack(Character character) {
+    public boolean attack(Character character) {
         final SecureRandom secureRandom = new SecureRandom();
         final int damage = secureRandom.nextInt(getWeapon().getDamage() + 1) * getWeapon().getRange();
         final int characterDamage = secureRandom.nextInt(character.getWeapon().getDamage() + 1) * character.getWeapon().getRange();
 
         if (character.takeDamage(damage)) {
             takeDamage(characterDamage);
+            System.out.printf("%s causes %d damage to %s, it fights back and does %d damage%n", getName(), damage, character.getName(), characterDamage);
+            return true;
         }
-        System.out.printf("%s causes %d damage to %s, it fights back and does %d damage%n", getName(), damage, character.getName(), characterDamage);
+        return false;
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.company.characters;
 import org.company.Door;
 import org.company.Level;
 import org.company.Room;
+import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
@@ -31,11 +32,27 @@ public class Monster extends Character {
     }
 
     @Override
+    public void die() {
+        super.die();
+        room.removeMonster(this);
+        room.addItem(getClothing());
+        setClothing(null);
+        room.addItem(getWeapon());
+        setWeapon(null);
+
+        for (final Item item :
+                getInventory().getItems()) {
+            getInventory().dropItem(item, room);
+        }
+    }
+
+    @Override
     public void move(Door door) {
     }
 
     @Override
-    public void attack(Character character) {
+    public boolean attack(Character character) {
+        return true;
     }
 
     @Override

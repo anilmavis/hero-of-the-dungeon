@@ -2,6 +2,7 @@ package org.company.characters;
 
 import org.company.Door;
 import org.company.Inventory;
+import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
@@ -9,9 +10,9 @@ public abstract class Character {
     private final String name;
     private Weapon weapon;
     private Clothing clothing;
+    private final Inventory inventory;
     private int hitPoints;
     private boolean isDead;
-    private final Inventory inventory;
 
     public Character(String name, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize) {
         this.name = name;
@@ -65,15 +66,30 @@ public abstract class Character {
         isDead = dead;
     }
 
+    public void die() {
+        setDead(true);
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
 
-    public abstract void move(Door door);
+    public void equip(Item item) {
+        inventory.removeItem(item);
+        inventory.setWeight(inventory.getWeight() - item.getWeight());
 
-    public void die() {
-        setDead(true);
+        if (item instanceof Weapon) {
+            inventory.addItem(weapon);
+            inventory.setWeight(inventory.getWeight() + weapon.getWeight());
+            weapon = (Weapon) item;
+        } else if (item instanceof Clothing) {
+            inventory.addItem(clothing);
+            inventory.setWeight(inventory.getWeight() + clothing.getWeight());
+            clothing = (Clothing) item;
+        }
     }
+
+    public abstract void move(Door door);
 
     public boolean takeDamage(int damage) {
         if (hitPoints < 1) {
@@ -85,7 +101,7 @@ public abstract class Character {
         }
     }
 
-    public abstract void attack(Character character);
+    public abstract boolean attack(Character character);
 
     public abstract void block();
 

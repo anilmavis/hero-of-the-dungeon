@@ -18,7 +18,7 @@ public class RandomText {
             for (int j = 0; j < 4; j++) {
                 for (int k = 0; k < 4; k++) {
                     for (int l = 0; l < 4; l++) {
-                        texts.add((i % 2 == 0 ? "This room is filled with " : "You see ") + colours[j] + " " + adjectives[k] + " " + objects[l] + ".");
+                        texts.add((i % 2 == 0 ? "This room is filled with " : "You see ") + "a " + colours[j] + " " + adjectives[k] + " " + objects[l] + ".");
                     }
                 }
             }
@@ -37,7 +37,6 @@ public class RandomText {
         texts.add("This room is very dark and you feel that someone is watching you.");
         texts.add("This room is very big. You hear some voices behind you.");
         texts.add("There is nothing in this room.");
-        System.out.println(texts);
     }
 
     public String next(boolean isFirstRoom) {
