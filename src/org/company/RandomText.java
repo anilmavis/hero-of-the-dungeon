@@ -2,10 +2,9 @@ package org.company;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RandomText {
-    public ArrayList<String> texts;
+    public final ArrayList<String> texts;
 
     public RandomText() {
         texts = new ArrayList<>();
@@ -39,13 +38,7 @@ public class RandomText {
         texts.add("There is nothing in this room.");
     }
 
-    public String next(boolean isFirstRoom) {
-        if (isFirstRoom) {
-            return "This room receives beams of sunlight from the stairs that connect the dungeons to the town.\nactions:\nhelp\nattack <monster number>\nmove <door number>\n.";
-        }
-        return texts.get(new SecureRandom().nextInt(texts.size()));
-    }
     public String next() {
-        return next(false);
+        return texts.get(new SecureRandom().nextInt(texts.size()));
     }
 }

@@ -1,37 +1,55 @@
 package org.company.characters;
 
-import org.company.Door;
 import org.company.Inventory;
+import org.company.Level;
+import org.company.Room;
 import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 public abstract class Character {
+    private Level level;
+    private Room room;
+    private int hitPoints;
     private final String name;
     private Weapon weapon;
     private Clothing clothing;
     private final Inventory inventory;
-    private int hitPoints;
-    private boolean isDead;
 
-    public Character(String name, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize) {
+    public Character(String name, int hitPoints, Weapon weapon, Clothing clothing, Inventory inventory) {
         this.name = name;
+        this.hitPoints = hitPoints;
         this.weapon = weapon;
         this.clothing = clothing;
-        this.hitPoints = hitPoints;
-        inventory = new Inventory(inventorySize);
+        this.inventory = inventory;
     }
 
-    public Character(String name, Weapon weapon, Clothing clothing, int hitPoints) {
-        this.name = name;
-        this.weapon = weapon;
-        this.clothing = clothing;
-        this.hitPoints = hitPoints;
-        inventory = new Inventory(1000);
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
     }
 
     public Weapon getWeapon() {
@@ -50,50 +68,27 @@ public abstract class Character {
         this.clothing = clothing;
     }
 
-    public int getHitPoints() {
-        return hitPoints;
-    }
-
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
-    }
-
-    public boolean isDead() {
-        return isDead;
-    }
-
-    public void setDead(boolean dead) {
-        isDead = dead;
-    }
-
-    public void die() {
-        setDead(true);
-    }
-
     public Inventory getInventory() {
         return inventory;
     }
 
     public void equip(Item item) {
-        inventory.removeItem(item);
+        inventory.remove(item);
         inventory.setWeight(inventory.getWeight() - item.getWeight());
 
         if (item instanceof Weapon) {
-            inventory.addItem(weapon);
+            inventory.add(weapon);
             inventory.setWeight(inventory.getWeight() + weapon.getWeight());
             weapon = (Weapon) item;
         } else if (item instanceof Clothing) {
-            inventory.addItem(clothing);
+            inventory.add(clothing);
             inventory.setWeight(inventory.getWeight() + clothing.getWeight());
             clothing = (Clothing) item;
         }
     }
 
-    public abstract void move(Door door);
-
     public boolean takeDamage(int damage) {
         if (hitPoints < 1) {
-            die();
             return false;
         } else {
             hitPoints -= damage;
@@ -103,9 +98,8 @@ public abstract class Character {
 
     public abstract boolean attack(Character character);
 
-    public abstract void block();
-
-    public void display() {
-        System.out.printf("%s %s, %d hit points, %s, %s%n", getClass().getSimpleName(), getName(), getHitPoints(), getWeapon().getName(), getClothing().getName());
+    @Override
+    public String toString() {
+        return String.format("%s, %d hit points, %s, %s", getName(), getHitPoints(), getWeapon().getName(), getClothing().getName());
     }
 }

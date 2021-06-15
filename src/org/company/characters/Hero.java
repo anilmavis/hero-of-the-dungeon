@@ -1,67 +1,30 @@
 package org.company.characters;
 
 import org.company.Door;
-import org.company.Level;
-import org.company.Room;
+import org.company.Inventory;
+import org.company.interfaces.Movable;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 import java.security.SecureRandom;
 
-public class Hero extends Character {
-    private String gender;
-    private int age;
-    private Room room;
-    private Level level;
+public class Hero extends Character implements Movable {
+    private final String gender;
+    private final int age;
     private int score;
 
-    public Hero(String name, String gender, int age, Weapon weapon, Clothing clothing, int hitPoints, int inventorySize, Room room, Level level, int score) {
-        super(name, weapon, clothing, hitPoints, inventorySize);
+    public Hero(String name, int hitPoints, String gender, int age, Weapon weapon, Clothing clothing, Inventory inventory) {
+        super(name, hitPoints, weapon, clothing, inventory);
         this.gender = gender;
-        setAge(age);
-        this.room = room;
-        this.level = level;
-        this.score = score;
-    }
-
-    public Hero(String name, String gender, int age, Weapon weapon, Clothing clothing, int hitPoints, Room room, Level level) {
-        super(name, weapon, clothing, hitPoints);
-        this.gender = gender;
-        setAge(age);
-        this.room = room;
-        this.level = level;
+        this.age = age;
     }
 
     public String getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(Level level) {
-        this.level = level;
     }
 
     public int getScore() {
@@ -75,9 +38,9 @@ public class Hero extends Character {
     @Override
     public void move(Door door) {
         if (door.isStair()) {
-            level = door.getLevel();
+            setLevel(door.getLevel());
         }
-        room = door.getRoom();
+        setRoom(door.getRoom());
     }
 
     @Override
@@ -95,13 +58,7 @@ public class Hero extends Character {
     }
 
     @Override
-    public void block() {
-        System.out.printf("%s blocks%n", getName());
-    }
-
-    @Override
-    public void display() {
-        System.out.printf("level %d, room %d%n", level.getId() + 1, room.getId() + 1);
-        super.display();
+    public String toString() {
+        return String.format("Level %d, Room %d%n%s", getLevel().getId() + 1, getRoom().getId() + 1, super.toString());
     }
 }

@@ -14,17 +14,17 @@ public class Room {
     private static int lastId = 0;
     private final int id;
     private final String text;
+    private final ArrayList<Door> doors;
     private final ArrayList<Monster> monsters;
     private final ArrayList<Townspeople> townspeople;
-    private final ArrayList<Door> doors;
     private final ArrayList<Item> items;
 
-    public Room(String text, ArrayList<Monster> monsters, ArrayList<Townspeople> townspeople) {
+    public Room(String text) {
         this.id = lastId++;
         this.text = text;
-        this.monsters = monsters;
-        this.townspeople = townspeople;
         this.doors = new ArrayList<>();
+        this.monsters = new ArrayList<>();
+        this.townspeople = new ArrayList<>();
         this.items = new ArrayList<>();
     }
 
@@ -48,83 +48,69 @@ public class Room {
         return monsters;
     }
 
-    public void removeMonster(Monster monster) {
-        monsters.remove(monster);
-    }
-
     public ArrayList<Townspeople> getTownspeople() {
         return townspeople;
-    }
-
-    public void removeTownspeople(Townspeople townspeople) {
-        this.townspeople.remove(townspeople);
     }
 
     public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-    }
-
-    public void removeItem(Item item) {
-        items.remove(item);
-    }
-
-    public void display() {
-        System.out.printf("%s%nThe hero sees the following.%n", text);
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%s%nThe hero sees the following.%n", text));
 
         for (int i = 0; i < doors.size(); i++) {
-            System.out.printf((doors.get(i).isStair() ? "stair" : "door") + " (d%d)%n", i + 1);
+            stringBuilder.append(String.format((doors.get(i).isStair() ? "stair" : "door") + " (d%d)%n", i + 1));
         }
 
         for (int i = 0; i < monsters.size(); i++) {
-            System.out.printf("%s (m%d)%n", monsters.get(i).getName(), i + 1);
+            stringBuilder.append(String.format("%s (m%d)%n", monsters.get(i).getName(), i + 1));
         }
 
         for (int i = 0; i < townspeople.size(); i++) {
-            System.out.printf("%s (t%d)%n", townspeople.get(i).getName(), i + 1);
+            stringBuilder.append(String.format("%s (t%d)%n", townspeople.get(i).getName(), i + 1));
         }
 
         for (int i = 0; i < items.size(); i++) {
-            System.out.printf("%s (i%d)%n", items.get(i).getName(), i + 1);
+            stringBuilder.append(String.format("%s (i%d)%n", items.get(i).getName(), i + 1));
         }
+        return stringBuilder.toString();
     }
 
-    public static ArrayList<Room> generate(SecureRandom secureRandom, int m, int n) {
+    public static ArrayList<Room> generate(Level level, int m, int n) {
+        final SecureRandom secureRandom = new SecureRandom();
+        final RandomText randomText = new RandomText();
         final ArrayList<Room> rooms = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                final ArrayList<Monster> monsters = new ArrayList<>();
+                final Room room = new Room(randomText.next());
                 final int x = secureRandom.nextInt(9) + 1;
 
                 for (int k = 0; k < x; k++) {
-                    monsters.add(MonsterInstance.ape());
+                    final Monster monster = MonsterInstance.ape();
+                    monster.setLevel(level);
+                    monster.setRoom(room);
+                    room.getMonsters().add(MonsterInstance.ape());
                 }
-                final ArrayList<Townspeople> townspeople = new ArrayList<>();
 
                 for (int k = 0; k < x / 3; k++) {
-                    townspeople.add(new Townspeople("townspeople", WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), 10, 100));
+                    room.getTownspeople().add(new Townspeople("townspeople", 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory()));
                 }
-                final Room room = new Room(new RandomText().next(), monsters, townspeople);
                 rooms.add(room);
-
-                for (final Monster monster :
-                        room.getMonsters()) {
-                    monster.setRoom(room);
-                }
             }
         }
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 final Room room = rooms.get(i * n + j);
-                if (j != 0) {
-                    room.addDoor(new Door(rooms.get(room.getId() - 1)));
-                }
 
                 if (j != n - 1) {
                     room.addDoor(new Door(rooms.get(room.getId() + 1)));
+                }
+
+                if (j != 0) {
+                    room.addDoor(new Door(rooms.get(room.getId() - 1)));
                 }
             }
         }
@@ -133,9 +119,10 @@ public class Room {
             if (i != m - 1) {
                 final int ni1 = secureRandom.nextInt(n);
                 final int ni2 = secureRandom.nextInt(n);
-                System.out.printf("%d, %d%n", ni1, ni2);
-                rooms.get(i * n + ni1).addDoor(new Door(rooms.get((i + 1) * n + ni2)));
-                rooms.get((i + 1) * n + ni2).addDoor(new Door(rooms.get(i * n + ni1)));
+                Room room1 = rooms.get(i * n + ni1);
+                Room room2 = rooms.get((i + 1) * n + ni2);
+                room1.addDoor(new Door(room2));
+                room2.addDoor(new Door(room1));
             }
         }
         lastId = 0;

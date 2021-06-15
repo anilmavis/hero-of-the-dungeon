@@ -1,5 +1,6 @@
 package org.company.characters;
 
+import org.company.Inventory;
 import org.company.items.clothing.ClothingInstance;
 import org.company.items.weapons.WeaponInstance;
 
@@ -12,26 +13,26 @@ public class MonsterInstance {
     }
 
     public static Monster ape() {
-        return new Monster("ape", WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), 1);
+        return new Monster("ape", 1, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory());
     }
 
     public static Monster bandit() {
-        return new Monster("bandit", WeaponInstance.skinningKnife(), ClothingInstance.simpleRobe(), 2);
+        return new Monster("bandit", 2, WeaponInstance.skinningKnife(), ClothingInstance.simpleRobe(), new Inventory());
     }
 
     public static Monster beast() {
-        return new Monster("beast", WeaponInstance.stiletto(), ClothingInstance.silkenVest(), 3);
+        return new Monster("beast", 3, WeaponInstance.stiletto(), ClothingInstance.silkenVest(), new Inventory());
     }
 
     public static Monster birdPerson() {
-        return new Monster("bird person", WeaponInstance.rustedSword(), ClothingInstance.strappedLeather(), 4);
+        return new Monster("bird person", 4, WeaponInstance.rustedSword(), ClothingInstance.strappedLeather(), new Inventory());
     }
 
     public static Monster blackGuard() {
-        return new Monster("black guard", WeaponInstance.copperSword(), ClothingInstance.buckskinTunic(), 5);
+        return new Monster("black guard", 5, WeaponInstance.copperSword(), ClothingInstance.buckskinTunic(), new Inventory());
     }
 
     public static Monster hannibal() {
-        return new Monster("hannibal", WeaponInstance.sabre(), ClothingInstance.wildLeather(), 6);
+        return new Monster("hannibal", 6, WeaponInstance.sabre(), ClothingInstance.wildLeather(), new Inventory());
     }
 }

@@ -10,11 +10,11 @@ public class Level {
     private final int n;
     private final ArrayList<Room> rooms;
 
-    public Level(int m, int n, ArrayList<Room> rooms) {
+    public Level(int m, int n) {
         this.id = lastId++;
         this.m = m;
         this.n = n;
-        this.rooms = rooms;
+        this.rooms = new ArrayList<>();
     }
 
     public int getId() {
@@ -33,29 +33,39 @@ public class Level {
         return rooms;
     }
 
-    public static ArrayList<Level> generate(SecureRandom secureRandom) {
+    public static ArrayList<Level> generate() {
+        final SecureRandom secureRandom = new SecureRandom();
         ArrayList<Level> levels = new ArrayList<>();
 
-        for (int i = 0; i < 17; i++) {
-            int m = secureRandom.nextInt(4) + 1;
-            int n = secureRandom.nextInt(4) + 1;
-            levels.add(new Level(m, n, Room.generate(secureRandom, m, n)));
+        for (int levelId = 0; levelId < 17; levelId++) {
+            final int m = secureRandom.nextInt(4) + 1;
+            final int n = secureRandom.nextInt(4) + 1;
+            final Level level = new Level(m, n);
+            for (final Room room :
+                    Room.generate(level, m, n)) {
+                level.getRooms().add(room);
+            }
+            levels.add(level);
         }
         for (int i = 0; i < levels.size(); i++) {
             if (i != levels.size() - 1) {
-                int m1 = levels.get(i).getM();
-                int i1 = secureRandom.nextInt(m1);
-                int n1 = levels.get(i).getN();
-                int j1 = secureRandom.nextInt(n1);
-                int m2 = levels.get(i + 1).getM();
-                int i2 = secureRandom.nextInt(m2);
-                int n2 = levels.get(i + 1).getN();
-                int j2 = secureRandom.nextInt(n2);
-                levels.get(i).getRooms().get(i1 * n1 + j1).addDoor(new Door(levels.get(i + 1).getRooms().get(i2 * n2 + j2), levels.get(i + 1)));
-                levels.get(i + 1).getRooms().get(i2 * n2 + j2).addDoor(new Door(levels.get(i).getRooms().get(i1 * n1 + j1), levels.get(i)));
+                final int m1 = levels.get(i).getM();
+                final int i1 = secureRandom.nextInt(m1);
+                final int n1 = levels.get(i).getN();
+                final int j1 = secureRandom.nextInt(n1);
+                final int m2 = levels.get(i + 1).getM();
+                final int i2 = secureRandom.nextInt(m2);
+                final int n2 = levels.get(i + 1).getN();
+                final int j2 = secureRandom.nextInt(n2);
+                final Level level1 = levels.get(i);
+                final Level level2 = levels.get(i + 1);
+                final Room room1 = level1.getRooms().get(i1 * n1 + j1);
+                final Room room2 = level2.getRooms().get(i2 * n2 + j2);
+                room1.addDoor(new Door(room2, level2));
+                room2.addDoor(new Door(room1, level1));
             }
         }
-        print(levels);
+        // print(levels);
         return levels;
     }
 

@@ -14,6 +14,10 @@ public class Inventory {
         items = new ArrayList<>();
     }
 
+    public Inventory() {
+        this(1000);
+    }
+
     public int getMaxWeight() {
         return maxWeight;
     }
@@ -30,18 +34,18 @@ public class Inventory {
         return items;
     }
 
-    public void addItem(Item item) {
+    public void add(Item item) {
         items.add(item);
         weight += item.getWeight();
     }
 
-    public void removeItem(Item item) {
+    public void remove(Item item) {
         items.remove(item);
         weight -= item.getWeight();
     }
 
-    public void dropItem(Item item, Room room) {
-        removeItem(item);
+    public void drop(Item item, Room room) {
+        remove(item);
         room.getItems().add(item);
     }
 
