@@ -7,8 +7,8 @@ import org.company.items.weapons.Weapon;
 public class Healer extends Townspeople {
     private final int healAmount;
 
-    public Healer(String name, int hitPoints, Weapon weapon, Clothing clothing, Inventory inventory, int healAmount) {
-        super(name, hitPoints, weapon, clothing, inventory);
+    public Healer(String name, int hitPoints, Weapon weapon, Clothing clothing, Inventory inventory, int score, int healAmount) {
+        super(name, hitPoints, weapon, clothing, inventory, score);
         this.healAmount = healAmount;
     }
 

@@ -82,6 +82,7 @@ public class Room {
     public static ArrayList<Room> generate(Level level, int m, int n) {
         final SecureRandom secureRandom = new SecureRandom();
         final RandomText randomText = new RandomText();
+        final RandomName randomName = new RandomName();
         final ArrayList<Room> rooms = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -92,11 +93,15 @@ public class Room {
                     final Monster monster = MonsterInstance.ape();
                     monster.setLevel(level);
                     monster.setRoom(room);
-                    room.getMonsters().add(MonsterInstance.ape());
+                    room.getMonsters().add(monster);
                 }
 
                 for (int k = 0; k < x / 3; k++) {
-                    room.getTownspeople().add(new Townspeople("townspeople", 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory()));
+                    if (secureRandom.nextInt() < 0.5) {
+                        room.getTownspeople().add(new Townspeople(randomName.next(), 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory(), 2));
+                    } else {
+                        room.getTownspeople().add(new Townspeople(randomName.next(), 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory(), 1));
+                    }
                 }
                 rooms.add(room);
             }

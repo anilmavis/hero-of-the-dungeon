@@ -2,13 +2,16 @@ package org.company.characters;
 
 import org.company.Door;
 import org.company.Inventory;
+import org.company.characters.townspeople.Healer;
+import org.company.characters.townspeople.Townspeople;
+import org.company.interfaces.Fightable;
 import org.company.interfaces.Movable;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 import java.security.SecureRandom;
 
-public class Hero extends Character implements Movable {
+public class Hero extends Character implements Movable, Fightable {
     private final String gender;
     private final int age;
     private int score;
@@ -44,21 +47,39 @@ public class Hero extends Character implements Movable {
     }
 
     @Override
-    public boolean attack(Character character) {
+    public void attack(Character character) {
         final SecureRandom secureRandom = new SecureRandom();
-        final int damage = secureRandom.nextInt(getWeapon().getDamage() + 1) * getWeapon().getRange();
+        final int heroDamage = secureRandom.nextInt(getWeapon().getDamage() + 1) * getWeapon().getRange();
         final int characterDamage = secureRandom.nextInt(character.getWeapon().getDamage() + 1) * character.getWeapon().getRange();
+        System.out.printf("%s causes %d damage to %s%n", getName(), heroDamage, character.getName());
+        character.setHitPoints(character.getHitPoints() - heroDamage);
 
-        if (character.takeDamage(damage)) {
-            takeDamage(characterDamage);
-            System.out.printf("%s causes %d damage to %s, it fights back and does %d damage%n", getName(), damage, character.getName(), characterDamage);
-            return true;
+        if (character.getHitPoints() < 1) {
+            character.die();
+        } else {
+            System.out.printf("it fights back and does %d damage%n", characterDamage);
+            setHitPoints(getHitPoints() - characterDamage);
+
+            if (getHitPoints() < 1) {
+                die();
+            }
         }
-        return false;
+    }
+
+    @Override
+    public void block() {}
+
+    public void rescue(Character character) {
+        if (character instanceof Townspeople) {
+            score += ((Townspeople) character).getScore();
+        }
+        if (character instanceof Healer) {
+            setHitPoints(getHitPoints() + ((Healer) character).getHealAmount());
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("Level %d, Room %d%n%s", getLevel().getId() + 1, getRoom().getId() + 1, super.toString());
+        return String.format("level %d, room %d%n%s", getLevel().getId() + 1, getRoom().getId() + 1, super.toString());
     }
 }

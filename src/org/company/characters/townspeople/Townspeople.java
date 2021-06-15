@@ -6,12 +6,14 @@ import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 public class Townspeople extends Character {
-    public Townspeople(String name, int hitPoints, Weapon weapon, Clothing clothing, Inventory inventory) {
+    private final int score;
+
+    public Townspeople(String name, int hitPoints, Weapon weapon, Clothing clothing, Inventory inventory, int score) {
         super(name, hitPoints, weapon, clothing, inventory);
+        this.score = score;
     }
 
-    @Override
-    public boolean attack(Character character) {
-        return true;
+    public int getScore() {
+        return score;
     }
 }

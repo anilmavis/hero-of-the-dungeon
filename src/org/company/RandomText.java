@@ -17,7 +17,7 @@ public class RandomText {
             for (int j = 0; j < 4; j++) {
                 for (int k = 0; k < 4; k++) {
                     for (int l = 0; l < 4; l++) {
-                        texts.add((i % 2 == 0 ? "This room is filled with " : "You see ") + "a " + colours[j] + " " + adjectives[k] + " " + objects[l] + ".");
+                        texts.add((i % 2 == 0 ? "This room is filled with " : "You see ") + colours[j] + " " + adjectives[k] + " " + objects[l] + "s.");
                     }
                 }
             }

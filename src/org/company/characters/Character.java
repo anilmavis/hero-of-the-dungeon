@@ -3,14 +3,18 @@ package org.company.characters;
 import org.company.Inventory;
 import org.company.Level;
 import org.company.Room;
+import org.company.characters.townspeople.Townspeople;
 import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
+
+import java.util.ArrayList;
 
 public abstract class Character {
     private Level level;
     private Room room;
     private int hitPoints;
+    private boolean isDead;
     private final String name;
     private Weapon weapon;
     private Clothing clothing;
@@ -46,6 +50,14 @@ public abstract class Character {
 
     public int getHitPoints() {
         return hitPoints;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public void setHitPoints(int hitPoints) {
@@ -87,16 +99,24 @@ public abstract class Character {
         }
     }
 
-    public boolean takeDamage(int damage) {
-        if (hitPoints < 1) {
-            return false;
-        } else {
-            hitPoints -= damage;
-            return true;
+    public void die() {
+        System.out.printf("%s dies%n", name);;
+        isDead = true;
+        if (this instanceof Monster) {
+            room.getMonsters().remove(this);
+        } else if (this instanceof Townspeople) {
+            room.getTownspeople().remove(this);
+        }
+        room.getItems().add(clothing);
+        clothing = null;
+        room.getItems().add(weapon);
+        weapon = null;
+
+        for (final Item item :
+                inventory.getItems()) {
+            inventory.drop(item, room);
         }
     }
-
-    public abstract boolean attack(Character character);
 
     @Override
     public String toString() {
