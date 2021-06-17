@@ -1,0 +1,9 @@
+anıl, 1
+hümay, 2
+özge, 4
+test, 0
+hello, 0
+testtest, 0
+12323, 0
+aaaa, 0
+a, 1

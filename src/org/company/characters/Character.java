@@ -120,6 +120,6 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        return String.format("%s, %d hit points, %s, %s", getName(), getHitPoints(), getWeapon().getName(), getClothing().getName());
+        return String.format("%s %s, %d hit points, %s, %s", getClass().getSimpleName(), getName(), getHitPoints(), getWeapon().getName(), getClothing().getName());
     }
 }

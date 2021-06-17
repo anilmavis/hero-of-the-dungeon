@@ -1,6 +1,5 @@
 package org.company;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Level {
@@ -34,12 +33,11 @@ public class Level {
     }
 
     public static ArrayList<Level> generate() {
-        final SecureRandom secureRandom = new SecureRandom();
         ArrayList<Level> levels = new ArrayList<>();
 
         for (int levelId = 0; levelId < 17; levelId++) {
-            final int m = secureRandom.nextInt(4) + 1;
-            final int n = secureRandom.nextInt(4) + 1;
+            final int m = Utility.SECURE_RANDOM.nextInt(4) + 1;
+            final int n = Utility.SECURE_RANDOM.nextInt(4) + 1;
             final Level level = new Level(m, n);
             for (final Room room :
                     Room.generate(level, m, n)) {
@@ -50,13 +48,13 @@ public class Level {
         for (int i = 0; i < levels.size(); i++) {
             if (i != levels.size() - 1) {
                 final int m1 = levels.get(i).getM();
-                final int i1 = secureRandom.nextInt(m1);
+                final int i1 = Utility.SECURE_RANDOM.nextInt(m1);
                 final int n1 = levels.get(i).getN();
-                final int j1 = secureRandom.nextInt(n1);
+                final int j1 = Utility.SECURE_RANDOM.nextInt(n1);
                 final int m2 = levels.get(i + 1).getM();
-                final int i2 = secureRandom.nextInt(m2);
+                final int i2 = Utility.SECURE_RANDOM.nextInt(m2);
                 final int n2 = levels.get(i + 1).getN();
-                final int j2 = secureRandom.nextInt(n2);
+                final int j2 = Utility.SECURE_RANDOM.nextInt(n2);
                 final Level level1 = levels.get(i);
                 final Level level2 = levels.get(i + 1);
                 final Room room1 = level1.getRooms().get(i1 * n1 + j1);

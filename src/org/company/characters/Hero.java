@@ -10,6 +10,7 @@ import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 import java.security.SecureRandom;
+import java.util.Comparator;
 
 public class Hero extends Character implements Movable, Fightable {
     private final String gender;
@@ -72,7 +73,9 @@ public class Hero extends Character implements Movable, Fightable {
     public void rescue(Character character) {
         if (character instanceof Townspeople) {
             score += ((Townspeople) character).getScore();
+            getRoom().getTownspeople().remove(character);
         }
+
         if (character instanceof Healer) {
             setHitPoints(getHitPoints() + ((Healer) character).getHealAmount());
         }
@@ -80,6 +83,6 @@ public class Hero extends Character implements Movable, Fightable {
 
     @Override
     public String toString() {
-        return String.format("level %d, room %d%n%s", getLevel().getId() + 1, getRoom().getId() + 1, super.toString());
+        return String.format("%s, %s score", super.toString(), score);
     }
 }

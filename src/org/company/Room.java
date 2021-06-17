@@ -3,11 +3,9 @@ package org.company;
 import org.company.characters.Monster;
 import org.company.characters.MonsterInstance;
 import org.company.characters.townspeople.Townspeople;
+import org.company.characters.townspeople.TownspeopleInstance;
 import org.company.items.Item;
-import org.company.items.clothing.ClothingInstance;
-import org.company.items.weapons.WeaponInstance;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Room {
@@ -80,28 +78,21 @@ public class Room {
     }
 
     public static ArrayList<Room> generate(Level level, int m, int n) {
-        final SecureRandom secureRandom = new SecureRandom();
-        final RandomText randomText = new RandomText();
-        final RandomName randomName = new RandomName();
         final ArrayList<Room> rooms = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                final Room room = new Room(randomText.next());
-                final int x = secureRandom.nextInt(9) + 1;
+                final Room room = new Room(Utility.RANDOM_TEXT.next());
+                final int x = Utility.SECURE_RANDOM.nextInt(level.getId() + 4) + 1; // [1, 9]
 
                 for (int k = 0; k < x; k++) {
-                    final Monster monster = MonsterInstance.ape();
+                    Monster monster = MonsterInstance.random(level.getId());
                     monster.setLevel(level);
                     monster.setRoom(room);
                     room.getMonsters().add(monster);
                 }
 
                 for (int k = 0; k < x / 3; k++) {
-                    if (secureRandom.nextInt() < 0.5) {
-                        room.getTownspeople().add(new Townspeople(randomName.next(), 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory(), 2));
-                    } else {
-                        room.getTownspeople().add(new Townspeople(randomName.next(), 22, WeaponInstance.glassShank(), ClothingInstance.shabbyJerkin(), new Inventory(), 1));
-                    }
+                    room.getTownspeople().add(TownspeopleInstance.random());
                 }
                 rooms.add(room);
             }
@@ -122,8 +113,8 @@ public class Room {
 
         for (int i = 0; i < m; i++) {
             if (i != m - 1) {
-                final int ni1 = secureRandom.nextInt(n);
-                final int ni2 = secureRandom.nextInt(n);
+                final int ni1 = Utility.SECURE_RANDOM.nextInt(n);
+                final int ni2 = Utility.SECURE_RANDOM.nextInt(n);
                 Room room1 = rooms.get(i * n + ni1);
                 Room room2 = rooms.get((i + 1) * n + ni2);
                 room1.addDoor(new Door(room2));
