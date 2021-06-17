@@ -15,6 +15,7 @@ public class Monster extends Character implements Fightable {
     }
 
     @Override
-    public void block() {
+    public boolean block() {
+        return false;
     }
 }

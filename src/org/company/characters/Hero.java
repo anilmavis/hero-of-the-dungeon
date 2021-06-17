@@ -1,16 +1,18 @@
 package org.company.characters;
 
-import org.company.Door;
+import org.company.Utility;
+import org.company.doors.Door;
 import org.company.Inventory;
 import org.company.characters.townspeople.Healer;
 import org.company.characters.townspeople.Townspeople;
+import org.company.doors.Stair;
 import org.company.interfaces.Fightable;
 import org.company.interfaces.Movable;
+import org.company.items.clothing.ChainMailArmour;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
 import java.security.SecureRandom;
-import java.util.Comparator;
 
 public class Hero extends Character implements Movable, Fightable {
     private final String gender;
@@ -41,8 +43,8 @@ public class Hero extends Character implements Movable, Fightable {
 
     @Override
     public void move(Door door) {
-        if (door.isStair()) {
-            setLevel(door.getLevel());
+        if (door instanceof Stair) {
+            setLevel(((Stair) door).getLevel());
         }
         setRoom(door.getRoom());
     }
@@ -50,16 +52,20 @@ public class Hero extends Character implements Movable, Fightable {
     @Override
     public void attack(Character character) {
         final SecureRandom secureRandom = new SecureRandom();
-        final int heroDamage = secureRandom.nextInt(getWeapon().getDamage() + 1) * getWeapon().getRange();
-        final int characterDamage = secureRandom.nextInt(character.getWeapon().getDamage() + 1) * character.getWeapon().getRange();
+        final int heroDamage = secureRandom.nextInt((getWeapon().getDamage() + getWeapon().getRange()));
+        final int characterDamage = secureRandom.nextInt(character.getWeapon().getDamage() + character.getWeapon().getRange());
         System.out.printf("%s causes %d damage to %s%n", getName(), heroDamage, character.getName());
         character.setHitPoints(character.getHitPoints() - heroDamage);
 
         if (character.getHitPoints() < 1) {
             character.die();
         } else {
-            System.out.printf("it fights back and does %d damage%n", characterDamage);
-            setHitPoints(getHitPoints() - characterDamage);
+            if (block()) {
+                System.out.printf("%s blocked the incoming attack%n", getName());
+            } else {
+                System.out.printf("it fights back and does %d damage%n", characterDamage);
+                setHitPoints(getHitPoints() - characterDamage);
+            }
 
             if (getHitPoints() < 1) {
                 die();
@@ -68,7 +74,14 @@ public class Hero extends Character implements Movable, Fightable {
     }
 
     @Override
-    public void block() {}
+    public boolean block() {
+        int blockChance = 5;
+
+        if (getClothing() instanceof ChainMailArmour) {
+            blockChance = 2;
+        }
+        return Utility.SECURE_RANDOM.nextInt(blockChance) < 1;
+    }
 
     public void rescue(Character character) {
         if (character instanceof Townspeople) {

@@ -21,96 +21,209 @@ public class Action {
                     System.out.println("help");
                     break;
                 case "move":
-                    switch (action[1].charAt(0)) {
-                        case 'd':
-                            hero.move(room.getDoors().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            flag = false;
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'd':
+                                hero.move(room.getDoors().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid door number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "attack":
-                    switch (action[1].charAt(0)) {
-                        case 'm':
-                            final Monster monster = room.getMonsters().get(Integer.parseInt(action[1].substring(1)) - 1);
-                            hero.attack(monster);
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'm':
+                                final Monster monster = room.getMonsters().get(Integer.parseInt(action[1].substring(1)) - 1);
+                                hero.attack(monster);
 
-                            if (monster.isDead()) {
-                                flag = false;
-                            }
-                            break;
-                        default:
-                            break;
+                                if (monster.isDead()) {
+                                    flag = false;
+                                }
+
+                                if (hero.isDead()) {
+                                    flag = false;
+                                }
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid monster number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "inventory":
                     System.out.println(hero.getInventory());
                     break;
                 case "view":
-                    switch (action[1].charAt(0)) {
-                        case 'd':
-                            System.out.println(room.getDoors().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            break;
-                        case 'm':
-                            System.out.println(room.getMonsters().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            break;
-                        case 't':
-                            System.out.println(room.getTownspeople().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            break;
-                        case 'i':
-                            System.out.println(room.getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'd':
+                                System.out.println(room.getDoors().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                break;
+                            case 'm':
+                                System.out.println(room.getMonsters().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                break;
+                            case 't':
+                                System.out.println(room.getTownspeople().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                break;
+                            case 'i':
+                                System.out.println(room.getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid object number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "take":
-                    switch (action[1].charAt(0)) {
-                        case 'i':
-                            final Item item = room.getItems().get(Integer.parseInt(action[1].substring(1)) - 1);
-                            hero.getInventory().add(item);
-                            room.getItems().remove(item);
-                            flag = false;
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'i':
+                                final Item item = room.getItems().get(Integer.parseInt(action[1].substring(1)) - 1);
+                                hero.getInventory().add(item);
+                                room.getItems().remove(item);
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid item number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "equip":
-                    switch (action[1].charAt(0)) {
-                        case 'i':
-                            hero.equip(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'i':
+                                hero.equip(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid item number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "drop":
-                    switch (action[1].charAt(0)) {
-                        case 'i':
-                            hero.getInventory().drop(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1), hero.getRoom());
-                            flag = false;
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'i':
+                                hero.getInventory().drop(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1), hero.getRoom());
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid item number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "rescue":
-                    switch (action[1].charAt(0)) {
-                        case 't':
-                            if (room.getMonsters().size() < 1) {
-                                hero.rescue(room.getTownspeople().get(Integer.parseInt(action[1].substring(1)) - 1));
-                                flag = false;
-                            }
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 't':
+                                if (room.getMonsters().size() < 1) {
+                                    hero.rescue(room.getTownspeople().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                    flag = false;
+                                } else {
+                                    System.out.println("there are monsters in the room");
+                                    flag = true;
+                                }
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid townspeople number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown");
+                        flag = true;
                     }
                     break;
                 case "exit":
                     return false;
                 default:
+                    System.out.println("invalid action");
                     break;
             }
         }

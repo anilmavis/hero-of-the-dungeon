@@ -36,7 +36,7 @@ public class WeaponInstance {
     }
 
     public static Dagger stiletto() {
-        return new Dagger("stiletto", 3, 300, 3);
+        return new Dagger("stiletto", 300, 3, 3);
     }
 
     public static ShortSword rustedSword() {
@@ -48,7 +48,7 @@ public class WeaponInstance {
     }
 
     public static ShortSword sabre() {
-        return new ShortSword("sabre", 3, 300, 3);
+        return new ShortSword("sabre", 300, 3, 3);
     }
 
     public static LongSword broadSword() {
@@ -108,19 +108,19 @@ public class WeaponInstance {
     }
 
     public static ShortBow boneBow() {
-        return new ShortBow("bone bow", 100, 1, 3);
+        return new ShortBow("bone bow", 300, 3, 3);
     }
 
     public static LongBow royalBow() {
-        return new LongBow("royal bow", 200, 2, 1);
+        return new LongBow("royal bow", 100, 1, 1);
     }
 
     public static LongBow deathBow() {
-        return new LongBow("death bow", 300, 3, 2);
+        return new LongBow("death bow", 200, 2, 2);
     }
 
     public static LongBow groveBow() {
-        return new LongBow("grove bow", 100, 0, 3);
+        return new LongBow("grove bow", 300, 3, 3);
     }
 
     public static CompositeBow reflexBow() {

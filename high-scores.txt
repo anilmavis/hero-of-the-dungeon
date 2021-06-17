@@ -7,3 +7,8 @@ testtest, 0
 12323, 0
 aaaa, 0
 a, 1
+anil, 0
+deneme3, 0
+deneme4, 10
+test, 0
+1, 0

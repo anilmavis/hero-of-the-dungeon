@@ -85,17 +85,20 @@ public abstract class Character {
     }
 
     public void equip(Item item) {
-        inventory.remove(item);
-        inventory.setWeight(inventory.getWeight() - item.getWeight());
-
         if (item instanceof Weapon) {
+            inventory.remove(item);
+            inventory.setWeight(inventory.getWeight() - item.getWeight());
             inventory.add(weapon);
             inventory.setWeight(inventory.getWeight() + weapon.getWeight());
             weapon = (Weapon) item;
         } else if (item instanceof Clothing) {
+            inventory.remove(item);
+            inventory.setWeight(inventory.getWeight() - item.getWeight());
             inventory.add(clothing);
             inventory.setWeight(inventory.getWeight() + clothing.getWeight());
             clothing = (Clothing) item;
+        } else {
+            System.out.println("jewelleries cannot be equipped");
         }
     }
 

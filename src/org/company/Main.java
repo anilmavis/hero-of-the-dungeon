@@ -23,6 +23,7 @@ public class Main {
         int age = Utility.SCANNER.nextInt();
 
         while (age < 0) {
+            System.out.println("age is lesser than 0");
             age = Utility.SCANNER.nextInt();
         }
         System.out.println("class:\n1. rogue: glass shank and strapped leather\n2. warrior: rusted hatchet and plate vest\n3. archer: crude bow, shabby jerkin");

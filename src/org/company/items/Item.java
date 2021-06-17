@@ -1,6 +1,6 @@
 package org.company.items;
 
-public class Item {
+public abstract class Item {
     private final String name;
     private final int weight;
     private final int value;

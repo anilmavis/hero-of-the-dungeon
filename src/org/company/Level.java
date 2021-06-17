@@ -1,5 +1,8 @@
 package org.company;
 
+import org.company.doors.Door;
+import org.company.doors.Stair;
+
 import java.util.ArrayList;
 
 public class Level {
@@ -39,12 +42,14 @@ public class Level {
             final int m = Utility.SECURE_RANDOM.nextInt(4) + 1;
             final int n = Utility.SECURE_RANDOM.nextInt(4) + 1;
             final Level level = new Level(m, n);
+
             for (final Room room :
                     Room.generate(level, m, n)) {
                 level.getRooms().add(room);
             }
             levels.add(level);
         }
+
         for (int i = 0; i < levels.size(); i++) {
             if (i != levels.size() - 1) {
                 final int m1 = levels.get(i).getM();
@@ -59,11 +64,11 @@ public class Level {
                 final Level level2 = levels.get(i + 1);
                 final Room room1 = level1.getRooms().get(i1 * n1 + j1);
                 final Room room2 = level2.getRooms().get(i2 * n2 + j2);
-                room1.addDoor(new Door(room2, level2));
-                room2.addDoor(new Door(room1, level1));
+                room1.addDoor(new Stair(room2, level2));
+                room2.addDoor(new Stair(room1, level1));
             }
         }
-        // print(levels);
+        print(levels);
         return levels;
     }
 
@@ -76,14 +81,12 @@ public class Level {
                 ArrayList<Door> doors = room.getDoors();
 
                 for (int i = 0; i < doors.size(); i++) {
-                    if (!doors.get(i).isStair()) {
-                        System.out.printf("        door (d%d), room %d%n", i + 1, doors.get(i).getRoom().getId() + 1);
-                    }
-                }
-
-                for (int i = 0; i < doors.size(); i++) {
-                    if (doors.get(i).isStair()) {
-                        System.out.printf("        stair (s%d), level %d%n", i + 1, doors.get(i).getLevel().getId() + 1);
+                    final Door door = doors.get(i);
+                    final String simpleName = door.getClass().getSimpleName();
+                    if (door instanceof Stair) {
+                        System.out.printf("        %s (d%d), level %d%n", simpleName, i + 1, ((Stair) door).getLevel().getId() + 1);
+                    } else {
+                        System.out.printf("        %s (d%d), room %d%n", simpleName, i + 1, door.getRoom().getId() + 1);
                     }
                 }
             }

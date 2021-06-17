@@ -4,7 +4,10 @@ import org.company.characters.Monster;
 import org.company.characters.MonsterInstance;
 import org.company.characters.townspeople.Townspeople;
 import org.company.characters.townspeople.TownspeopleInstance;
+import org.company.doors.Door;
 import org.company.items.Item;
+import org.company.items.jewelleries.Jewellery;
+import org.company.items.jewelleries.JewelleryInstance;
 
 import java.util.ArrayList;
 
@@ -60,7 +63,7 @@ public class Room {
         stringBuilder.append(String.format("%s%nThe hero sees the following.%n", text));
 
         for (int i = 0; i < doors.size(); i++) {
-            stringBuilder.append(String.format((doors.get(i).isStair() ? "stair" : "door") + " (d%d)%n", i + 1));
+            stringBuilder.append(String.format(doors.get(i).getClass().getSimpleName() + " (d%d)%n", i + 1));
         }
 
         for (int i = 0; i < monsters.size(); i++) {
@@ -79,20 +82,28 @@ public class Room {
 
     public static ArrayList<Room> generate(Level level, int m, int n) {
         final ArrayList<Room> rooms = new ArrayList<>();
+
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                final Room room = new Room(Utility.RANDOM_TEXT.next());
-                final int x = Utility.SECURE_RANDOM.nextInt(level.getId() + 4) + 1; // [1, 9]
+                final Room room = new Room(Utility.TEXT.random());
+                final int x = Utility.SECURE_RANDOM.nextInt(level.getId() + 4) + 1;
 
                 for (int k = 0; k < x; k++) {
                     Monster monster = MonsterInstance.random(level.getId());
                     monster.setLevel(level);
                     monster.setRoom(room);
+
+                    if (Utility.SECURE_RANDOM.nextInt(5) < 1) {
+                        monster.getInventory().add(JewelleryInstance.random());
+                    }
                     room.getMonsters().add(monster);
                 }
 
                 for (int k = 0; k < x / 3; k++) {
                     room.getTownspeople().add(TownspeopleInstance.random());
+                }
+                if (Utility.SECURE_RANDOM.nextInt(5) < 1) {
+                    room.getItems().add(JewelleryInstance.random());
                 }
                 rooms.add(room);
             }
