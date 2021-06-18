@@ -1,16 +1,12 @@
 package org.company;
 
 import org.company.characters.Hero;
-import org.company.highScores.Entry;
-import org.company.highScores.EntryComparator;
+import org.company.highScores.HighScore;
 import org.company.items.clothing.Clothing;
 import org.company.items.clothing.ClothingInstance;
 import org.company.items.weapons.Weapon;
 import org.company.items.weapons.WeaponInstance;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
@@ -26,20 +22,23 @@ public class Main {
             System.out.println("age is lesser than 0");
             age = Utility.SCANNER.nextInt();
         }
-        System.out.println("class:\n1. rogue: glass shank and strapped leather\n2. warrior: rusted hatchet and plate vest\n3. archer: crude bow, shabby jerkin");
+        System.out.println("class:\n1. rogue: glass shank and shabby jerkin\n2. warrior: rusted hatchet and shabby jerkin\n3. archer: crude bow and shabby jerkin");
         Weapon weapon = WeaponInstance.glassShank();
-        Clothing clothing = ClothingInstance.strappedLeather();
+        Clothing clothing = ClothingInstance.shabbyJerkin();
 
         switch (Utility.SCANNER.nextInt()) {
             case 2:
                 weapon = WeaponInstance.rustedHatchet();
-                clothing = ClothingInstance.plateVest();
+                clothing = ClothingInstance.shabbyJerkin();
+                System.out.printf("%s is a warrior%n", name);
                 break;
             case 3:
-                weapon = WeaponInstance.crudeBow();
+                weapon = WeaponInstance.recurveBow();
                 clothing = ClothingInstance.shabbyJerkin();
+                System.out.printf("%s is an archer%n", name);
                 break;
             default:
+                System.out.printf("%s is a rogue%n", name);
                 break;
         }
         Utility.SCANNER.nextLine();
@@ -55,30 +54,7 @@ public class Main {
             System.out.print(hero.getRoom());
         } while (Action.handle(hero) && !hero.isDead());
         Utility.SCANNER.close();
-
-        try {
-            File file = new File("high-scores.txt");
-            file.createNewFile();
-            FileWriter fileWriter = new FileWriter(file.getName(), true);
-            fileWriter.write(String.format("%s%n", new Entry(hero.getName(), hero.getScore())));
-            fileWriter.close();
-            FileReader fileReader = new FileReader(file.getName());
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            ArrayList<Entry> entries = new ArrayList<>();
-
-            for (int i = 0; i < Files.lines(Paths.get(file.getName())).count(); i++) {
-                String[] strings = bufferedReader.readLine().split(", ");
-                entries.add(new Entry(strings[0], Integer.parseInt(strings[1])));
-            }
-            bufferedReader.close();
-            entries.sort(new EntryComparator());
-
-            System.out.println("high scores:");
-            for (Entry entry : entries) {
-                System.out.println(entry);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HighScore.write(hero);
+        HighScore.read();
     }
 }

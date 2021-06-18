@@ -18,7 +18,7 @@ public class Action {
 
             switch (action[0]) {
                 case "help":
-                    System.out.println("help");
+                    System.out.println("actions:\nhelp\nmove <door>\nattack <character>\ninventory\nview <any>\ntake <item>\ndrop <item>\nequip <item>\nrescue <townspeople>\nexit");
                     break;
                 case "move":
                     try {
@@ -39,9 +39,6 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
-                        flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
                         flag = true;
                     }
                     break;
@@ -72,9 +69,6 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
-                        flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
                         flag = true;
                     }
                     break;
@@ -109,9 +103,6 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
-                        flag = true;
                     }
                     break;
                 case "take":
@@ -136,33 +127,6 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
-                        flag = true;
-                    }
-                    break;
-                case "equip":
-                    try {
-                        switch (action[1].charAt(0)) {
-                            case 'i':
-                                hero.equip(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
-                                break;
-                            default:
-                                System.out.println("invalid argument");
-                                break;
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("no argument");
-                        flag = true;
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("invalid item number");
-                        flag = true;
-                    } catch (NumberFormatException e) {
-                        System.out.println("not a number");
-                        flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
-                        flag = true;
                     }
                     break;
                 case "drop":
@@ -185,8 +149,27 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
+                    }
+                    break;
+                case "equip":
+                    try {
+                        switch (action[1].charAt(0)) {
+                            case 'i':
+                                hero.equip(hero.getInventory().getItems().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("invalid argument");
+                                break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("no argument");
+                        flag = true;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("invalid item number");
+                        flag = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("not a number");
                         flag = true;
                     }
                     break;
@@ -214,9 +197,6 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
-                        flag = true;
-                    } catch (Exception e) {
-                        System.out.println("unknown");
                         flag = true;
                     }
                     break;

@@ -68,7 +68,7 @@ public class Level {
                 room2.addDoor(new Stair(room1, level1));
             }
         }
-        print(levels);
+        // print(levels);
         return levels;
     }
 

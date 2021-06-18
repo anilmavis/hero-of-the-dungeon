@@ -12,8 +12,6 @@ import org.company.items.clothing.ChainMailArmour;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
-import java.security.SecureRandom;
-
 public class Hero extends Character implements Movable, Fightable {
     private final String gender;
     private final int age;
@@ -51,11 +49,16 @@ public class Hero extends Character implements Movable, Fightable {
 
     @Override
     public void attack(Character character) {
-        final SecureRandom secureRandom = new SecureRandom();
-        final int heroDamage = secureRandom.nextInt((getWeapon().getDamage() + getWeapon().getRange()));
-        final int characterDamage = secureRandom.nextInt(character.getWeapon().getDamage() + character.getWeapon().getRange());
-        System.out.printf("%s causes %d damage to %s%n", getName(), heroDamage, character.getName());
-        character.setHitPoints(character.getHitPoints() - heroDamage);
+        int damage = Utility.SECURE_RANDOM.nextInt((getWeapon().getDamage() * 2 + getWeapon().getRange()));
+        final int protection = character.getClothing().getProtection();
+
+        if (damage <= protection) {
+            damage = 1;
+        } else {
+            damage -= protection;
+        }
+        System.out.printf("%s causes %d damage to %s%n", getName(), damage, character.getName());
+        character.setHitPoints(character.getHitPoints() - damage);
 
         if (character.getHitPoints() < 1) {
             character.die();
@@ -63,22 +66,23 @@ public class Hero extends Character implements Movable, Fightable {
             if (block()) {
                 System.out.printf("%s blocked the incoming attack%n", getName());
             } else {
-                System.out.printf("it fights back and does %d damage%n", characterDamage);
-                setHitPoints(getHitPoints() - characterDamage);
-            }
+                if (character instanceof Monster) {
+                    ((Monster) character).attack(this);
 
-            if (getHitPoints() < 1) {
-                die();
+                    if (getHitPoints() < 1) {
+                        die();
+                    }
+                }
             }
         }
     }
 
     @Override
     public boolean block() {
-        int blockChance = 5;
+        int blockChance = 8;
 
         if (getClothing() instanceof ChainMailArmour) {
-            blockChance = 2;
+            blockChance /= 2;
         }
         return Utility.SECURE_RANDOM.nextInt(blockChance) < 1;
     }
@@ -86,11 +90,11 @@ public class Hero extends Character implements Movable, Fightable {
     public void rescue(Character character) {
         if (character instanceof Townspeople) {
             score += ((Townspeople) character).getScore();
-            getRoom().getTownspeople().remove(character);
-        }
 
-        if (character instanceof Healer) {
-            setHitPoints(getHitPoints() + ((Healer) character).getHealAmount());
+            if (character instanceof Healer) {
+                setHitPoints(getHitPoints() + ((Healer) character).getHealAmount());
+            }
+            getRoom().getTownspeople().remove(character);
         }
     }
 

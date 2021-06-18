@@ -36,7 +36,7 @@ public class WeaponInstance {
     }
 
     public static Dagger stiletto() {
-        return new Dagger("stiletto", 300, 3, 3);
+        return new Dagger("stiletto", 300, 3, 4);
     }
 
     public static ShortSword rustedSword() {
@@ -48,7 +48,7 @@ public class WeaponInstance {
     }
 
     public static ShortSword sabre() {
-        return new ShortSword("sabre", 300, 3, 3);
+        return new ShortSword("sabre", 300, 3, 4);
     }
 
     public static LongSword broadSword() {
@@ -60,7 +60,7 @@ public class WeaponInstance {
     }
 
     public static LongSword ancientSword() {
-        return new LongSword("ancient sword", 300, 3, 3);
+        return new LongSword("ancient sword", 300, 3, 4);
     }
 
     public static SmallAxe rustedHatchet() {
@@ -72,7 +72,7 @@ public class WeaponInstance {
     }
 
     public static SmallAxe boardingAxe() {
-        return new SmallAxe("boarding axe", 300, 3, 3);
+        return new SmallAxe("boarding axe", 300, 3, 4);
     }
 
     public static MediumAxe stoneAxe() {
@@ -84,7 +84,7 @@ public class WeaponInstance {
     }
 
     public static MediumAxe woodSplitter() {
-        return new MediumAxe("wood splitter", 300, 3, 3);
+        return new MediumAxe("wood splitter", 300, 3, 4);
     }
 
     public static BroadAxe poleAxe() {
@@ -96,7 +96,7 @@ public class WeaponInstance {
     }
 
     public static BroadAxe gildedAxe() {
-        return new BroadAxe("gilded axe", 300, 3, 3);
+        return new BroadAxe("gilded axe", 300, 3, 4);
     }
 
     public static ShortBow crudeBow() {
@@ -108,7 +108,7 @@ public class WeaponInstance {
     }
 
     public static ShortBow boneBow() {
-        return new ShortBow("bone bow", 300, 3, 3);
+        return new ShortBow("bone bow", 300, 3, 4);
     }
 
     public static LongBow royalBow() {
@@ -120,7 +120,7 @@ public class WeaponInstance {
     }
 
     public static LongBow groveBow() {
-        return new LongBow("grove bow", 300, 3, 3);
+        return new LongBow("grove bow", 300, 3, 4);
     }
 
     public static CompositeBow reflexBow() {
@@ -132,6 +132,6 @@ public class WeaponInstance {
     }
 
     public static CompositeBow sniperBow() {
-        return new CompositeBow("sniper bow", 300, 3, 3);
+        return new CompositeBow("sniper bow", 300, 3, 4);
     }
 }

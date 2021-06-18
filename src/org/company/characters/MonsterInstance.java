@@ -42,14 +42,14 @@ public class MonsterInstance {
     }
 
     public static Monster birdPerson() {
-        return new Monster("bird person", 4, WeaponInstance.rustedSword(), ClothingInstance.strappedLeather(), new Inventory());
+        return new Monster("bird person", 8, WeaponInstance.rustedSword(), ClothingInstance.strappedLeather(), new Inventory());
     }
 
     public static Monster blackGuard() {
-        return new Monster("black guard", 5, WeaponInstance.copperSword(), ClothingInstance.buckskinTunic(), new Inventory());
+        return new Monster("black guard", 16, WeaponInstance.copperSword(), ClothingInstance.buckskinTunic(), new Inventory());
     }
 
     public static Monster hannibal() {
-        return new Monster("hannibal", 6, WeaponInstance.sabre(), ClothingInstance.wildLeather(), new Inventory());
+        return new Monster("hannibal", 32, WeaponInstance.sabre(), ClothingInstance.wildLeather(), new Inventory());
     }
 }

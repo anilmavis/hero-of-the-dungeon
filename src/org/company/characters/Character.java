@@ -8,8 +8,6 @@ import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
-import java.util.ArrayList;
-
 public abstract class Character {
     private Level level;
     private Room room;
@@ -52,16 +50,16 @@ public abstract class Character {
         return hitPoints;
     }
 
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
     public boolean isDead() {
         return isDead;
     }
 
     public void setDead(boolean dead) {
         isDead = dead;
-    }
-
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
     }
 
     public Weapon getWeapon() {
@@ -103,8 +101,9 @@ public abstract class Character {
     }
 
     public void die() {
-        System.out.printf("%s dies%n", name);;
+        System.out.printf("%s dies%n", name);
         isDead = true;
+
         if (this instanceof Monster) {
             room.getMonsters().remove(this);
         } else if (this instanceof Townspeople) {

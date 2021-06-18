@@ -3,7 +3,7 @@ package org.company;
 import java.util.ArrayList;
 
 public class Text {
-    public final ArrayList<String> texts;
+    private final ArrayList<String> texts;
 
     public Text() {
         texts = new ArrayList<>();

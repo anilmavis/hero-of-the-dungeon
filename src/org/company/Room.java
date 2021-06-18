@@ -6,7 +6,6 @@ import org.company.characters.townspeople.Townspeople;
 import org.company.characters.townspeople.TownspeopleInstance;
 import org.company.doors.Door;
 import org.company.items.Item;
-import org.company.items.jewelleries.Jewellery;
 import org.company.items.jewelleries.JewelleryInstance;
 
 import java.util.ArrayList;
@@ -55,29 +54,6 @@ public class Room {
 
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%s%nThe hero sees the following.%n", text));
-
-        for (int i = 0; i < doors.size(); i++) {
-            stringBuilder.append(String.format(doors.get(i).getClass().getSimpleName() + " (d%d)%n", i + 1));
-        }
-
-        for (int i = 0; i < monsters.size(); i++) {
-            stringBuilder.append(String.format("%s (m%d)%n", monsters.get(i).getName(), i + 1));
-        }
-
-        for (int i = 0; i < townspeople.size(); i++) {
-            stringBuilder.append(String.format("%s (t%d)%n", townspeople.get(i).getName(), i + 1));
-        }
-
-        for (int i = 0; i < items.size(); i++) {
-            stringBuilder.append(String.format("%s (i%d)%n", items.get(i).getName(), i + 1));
-        }
-        return stringBuilder.toString();
     }
 
     public static ArrayList<Room> generate(Level level, int m, int n) {
@@ -134,5 +110,28 @@ public class Room {
         }
         lastId = 0;
         return rooms;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%s%nThe hero sees the following.%n", text));
+
+        for (int i = 0; i < doors.size(); i++) {
+            stringBuilder.append(String.format(doors.get(i).getClass().getSimpleName() + " (d%d)%n", i + 1));
+        }
+
+        for (int i = 0; i < monsters.size(); i++) {
+            stringBuilder.append(String.format("%s (m%d)%n", monsters.get(i).getName(), i + 1));
+        }
+
+        for (int i = 0; i < townspeople.size(); i++) {
+            stringBuilder.append(String.format("%s (t%d)%n", townspeople.get(i).getName(), i + 1));
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            stringBuilder.append(String.format("%s (i%d)%n", items.get(i).getName(), i + 1));
+        }
+        return stringBuilder.toString();
     }
 }

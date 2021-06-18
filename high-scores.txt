@@ -12,3 +12,8 @@ deneme3, 0
 deneme4, 10
 test, 0
 1, 0
+1, 0
+anil, 0
+a, 13
+anil, 2
+wowwww, 2
