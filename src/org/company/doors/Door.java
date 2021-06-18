@@ -12,4 +12,9 @@ public class Door {
     public Room getRoom() {
         return room;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (room %s)", getClass().getSimpleName(), room.getId() + 1);
+    }
 }

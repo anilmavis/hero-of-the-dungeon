@@ -14,4 +14,9 @@ public class Stair extends Door {
     public Level getLevel() {
         return level;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (level %s)", getClass().getSimpleName(), level.getId() + 1);
+    }
 }

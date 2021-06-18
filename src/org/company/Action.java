@@ -80,6 +80,7 @@ public class Action {
                         switch (action[1].charAt(0)) {
                             case 'd':
                                 System.out.println(room.getDoors().get(Integer.parseInt(action[1].substring(1)) - 1));
+                                hero.setScore(hero.getScore() - 1);
                                 break;
                             case 'm':
                                 System.out.println(room.getMonsters().get(Integer.parseInt(action[1].substring(1)) - 1));

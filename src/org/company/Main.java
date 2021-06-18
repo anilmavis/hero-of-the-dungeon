@@ -11,6 +11,7 @@ import java.util.*;
 
 public class Main {
     public static void main(final String[] args) {
+        HighScore.read();
         System.out.println("name:");
         final String name = Utility.SCANNER.nextLine();
         System.out.println("gender:");
