@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Inventory {
     private final int maxWeight;
     private int weight;
+    private int value;
     private final ArrayList<Item> items;
 
     public Inventory(int maxWeight) {
@@ -30,18 +31,33 @@ public class Inventory {
         this.weight = weight;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void add(Item item) {
+    public boolean add(Item item) {
+        if (item.getWeight() + weight > maxWeight) {
+            System.out.println("inventory is full");
+            return false;
+        }
         items.add(item);
         weight += item.getWeight();
+        value += item.getValue();
+        return true;
     }
 
     public void remove(Item item) {
         items.remove(item);
         weight -= item.getWeight();
+        value -= item.getValue();
     }
 
     public void drop(Item item, Room room) {

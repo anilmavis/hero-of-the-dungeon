@@ -64,8 +64,8 @@ public class Level {
                 final Level level2 = levels.get(i + 1);
                 final Room room1 = level1.getRooms().get(i1 * n1 + j1);
                 final Room room2 = level2.getRooms().get(i2 * n2 + j2);
-                room1.addDoor(new Stair(room2, level2));
-                room2.addDoor(new Stair(room1, level1));
+                room1.getDoors().add(new Stair(room2, level2));
+                room2.getDoors().add(new Stair(room1, level1));
             }
         }
         // print(levels);

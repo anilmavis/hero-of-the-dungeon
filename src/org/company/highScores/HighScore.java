@@ -15,7 +15,7 @@ public class HighScore {
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file.getName(), true);
-            fileWriter.write(String.format("%s%n", new Entry(hero.getName(), hero.getScore())));
+            fileWriter.write(String.format("%s%n", new Entry(hero.getName(), hero.getRescueScore() + hero.getInventory().getValue())));
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

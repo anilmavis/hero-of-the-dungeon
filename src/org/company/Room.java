@@ -40,10 +40,6 @@ public class Room {
         return doors;
     }
 
-    public void addDoor(Door door) {
-        doors.add(door);
-    }
-
     public ArrayList<Monster> getMonsters() {
         return monsters;
     }
@@ -89,11 +85,11 @@ public class Room {
                 final Room room = rooms.get(i * n + j);
 
                 if (j != n - 1) {
-                    room.addDoor(new Door(rooms.get(room.getId() + 1)));
+                    room.getDoors().add(new Door(rooms.get(room.getId() + 1)));
                 }
 
                 if (j != 0) {
-                    room.addDoor(new Door(rooms.get(room.getId() - 1)));
+                    room.getDoors().add(new Door(rooms.get(room.getId() - 1)));
                 }
             }
         }
@@ -104,8 +100,8 @@ public class Room {
                 final int ni2 = Utility.SECURE_RANDOM.nextInt(n);
                 Room room1 = rooms.get(i * n + ni1);
                 Room room2 = rooms.get((i + 1) * n + ni2);
-                room1.addDoor(new Door(room2));
-                room2.addDoor(new Door(room1));
+                room1.getDoors().add(new Door(room2));
+                room2.getDoors().add(new Door(room1));
             }
         }
         lastId = 0;

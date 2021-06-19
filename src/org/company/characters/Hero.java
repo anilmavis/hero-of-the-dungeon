@@ -15,7 +15,7 @@ import org.company.items.weapons.Weapon;
 public class Hero extends Character implements Movable, Fightable {
     private final String gender;
     private final int age;
-    private int score;
+    private int rescueScore;
 
     public Hero(String name, int hitPoints, String gender, int age, Weapon weapon, Clothing clothing, Inventory inventory) {
         super(name, hitPoints, weapon, clothing, inventory);
@@ -31,12 +31,12 @@ public class Hero extends Character implements Movable, Fightable {
         return age;
     }
 
-    public int getScore() {
-        return score;
+    public int getRescueScore() {
+        return rescueScore;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setRescueScore(int rescueScore) {
+        this.rescueScore = rescueScore;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Hero extends Character implements Movable, Fightable {
 
     public void rescue(Character character) {
         if (character instanceof Townspeople) {
-            score += ((Townspeople) character).getScore();
+            rescueScore += ((Townspeople) character).getScore();
 
             if (character instanceof Healer) {
                 setHitPoints(getHitPoints() + ((Healer) character).getHealAmount());
@@ -100,6 +100,6 @@ public class Hero extends Character implements Movable, Fightable {
 
     @Override
     public String toString() {
-        return String.format("%s, %s score", super.toString(), score);
+        return String.format("%s, %s score", super.toString(), rescueScore + getInventory().getValue());
     }
 }

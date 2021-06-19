@@ -8,6 +8,8 @@ import org.company.items.Item;
 import org.company.items.clothing.Clothing;
 import org.company.items.weapons.Weapon;
 
+import java.util.ArrayList;
+
 public abstract class Character {
     private Level level;
     private Room room;
@@ -113,11 +115,8 @@ public abstract class Character {
         clothing = null;
         room.getItems().add(weapon);
         weapon = null;
-
-        for (final Item item :
-                inventory.getItems()) {
-            inventory.drop(item, room);
-        }
+        ArrayList<Item> items = new ArrayList<>(inventory.getItems());
+        items.forEach(item -> inventory.drop(item, room));
     }
 
     @Override
