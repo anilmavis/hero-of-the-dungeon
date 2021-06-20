@@ -83,6 +83,7 @@ public class Level {
                 for (int i = 0; i < doors.size(); i++) {
                     final Door door = doors.get(i);
                     final String simpleName = door.getClass().getSimpleName();
+
                     if (door instanceof Stair) {
                         System.out.printf("        %s (d%d), level %d%n", simpleName, i + 1, ((Stair) door).getLevel().getId() + 1);
                     } else {

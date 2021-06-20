@@ -74,6 +74,7 @@ public class Room {
                 for (int k = 0; k < x / 3; k++) {
                     room.getTownspeople().add(TownspeopleInstance.random());
                 }
+
                 if (Utility.SECURE_RANDOM.nextInt(5) < 1) {
                     room.getItems().add(JewelleryInstance.random());
                 }

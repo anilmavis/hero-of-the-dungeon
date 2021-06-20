@@ -26,6 +26,7 @@ public class HighScore {
         try {
             FileReader fileReader = new FileReader(file.getName());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+
             for (int i = 0; i < Files.lines(Paths.get(file.getName())).count(); i++) {
                 String[] strings = bufferedReader.readLine().split(", ");
                 entries.add(new Entry(strings[0], Integer.parseInt(strings[1])));

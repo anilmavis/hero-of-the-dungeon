@@ -5,6 +5,7 @@ import org.company.items.Item;
 public abstract class Weapon extends Item {
     private final int damage;
     private final int range;
+
     public Weapon(String name, int weight, int value, int damage, int range) {
         super(name, weight, value);
         this.damage = damage;
@@ -17,5 +18,10 @@ public abstract class Weapon extends Item {
 
     public int getRange() {
         return range;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %d damage, %d range", super.toString(), damage, range);
     }
 }

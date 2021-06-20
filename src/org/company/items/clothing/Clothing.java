@@ -13,4 +13,9 @@ public abstract class Clothing extends Item {
     public int getProtection() {
         return protection;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %d protection", super.toString(), protection);
+    }
 }
