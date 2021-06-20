@@ -18,4 +18,9 @@ public abstract class Weapon extends Item {
     public int getRange() {
         return range;
     }
+   
+    @Override
+    public String toString() {
+        return String.format("%s, %d damage, %d range", super.toString(), damage, range);
+    }
 }
