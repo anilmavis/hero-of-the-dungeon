@@ -12,23 +12,20 @@ public class Text {
         String[] objects = {"mirror", "painting", "chair", "table"};
         String[] animals = {"hedgehog", "rat", "bat", "snake"};
 
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 4; j++) {
-                for (int k = 0; k < 4; k++) {
-                    for (int l = 0; l < 4; l++) {
-                        texts.add((i % 2 == 0 ? "This room is filled with " : "You see ") + colours[j] + " " + adjectives[k] + " " + objects[l] + "s.");
-                    }
+        for (int i = 0; i < colours.length; i++) {
+            for (int j = 0; j < adjectives.length; j++) {
+                for (int k = 0; k < objects.length; k++) {
+                    texts.add((Utility.SECURE_RANDOM.nextInt(2) < 1 ? "This room is filled with " : "You see ") + colours[i] + " " + adjectives[j] + " " + objects[k] + "s.");
                 }
             }
         }
 
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 4; j++) {
-                for (int k = 0; k < 4; k++) {
-                    texts.add("Be careful about " + colours[j] + " " + animals[k] + "s.");
-                }
+        for (int i = 0; i < colours.length; i++) {
+            for (int j = 0; j < animals.length; j++) {
+                texts.add("Be careful about " + colours[i] + " " + animals[j] + "s.");
             }
         }
+        // System.out.println(texts.size() + "\n" + texts);
     }
 
     public String random() {

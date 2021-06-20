@@ -40,6 +40,9 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
+                        flag = true;
                     }
                     break;
                 case "attack":
@@ -69,6 +72,9 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
                         flag = true;
                     }
                     break;
@@ -104,6 +110,9 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
+                        flag = true;
                     }
                     break;
                 case "take":
@@ -130,6 +139,9 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
+                        flag = true;
                     }
                     break;
                 case "drop":
@@ -152,6 +164,9 @@ public class Action {
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
                         flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
+                        flag = true;
                     }
                     break;
                 case "equip":
@@ -173,6 +188,9 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
                         flag = true;
                     }
                     break;
@@ -200,6 +218,9 @@ public class Action {
                         flag = true;
                     } catch (NumberFormatException e) {
                         System.out.println("not a number");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("unknown exception");
                         flag = true;
                     }
                     break;

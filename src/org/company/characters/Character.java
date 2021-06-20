@@ -106,17 +106,19 @@ public abstract class Character {
         System.out.printf("%s dies%n", name);
         isDead = true;
 
-        if (this instanceof Monster) {
-            room.getMonsters().remove(this);
-        } else if (this instanceof Townspeople) {
-            room.getTownspeople().remove(this);
+        if (!(this instanceof Hero)) {
+            if (this instanceof Monster) {
+                room.getMonsters().remove(this);
+            } else if (this instanceof Townspeople) {
+                room.getTownspeople().remove(this);
+            }
+            room.getItems().add(clothing);
+            clothing = null;
+            room.getItems().add(weapon);
+            weapon = null;
+            ArrayList<Item> items = new ArrayList<>(inventory.getItems());
+            items.forEach(item -> inventory.drop(item, room));
         }
-        room.getItems().add(clothing);
-        clothing = null;
-        room.getItems().add(weapon);
-        weapon = null;
-        ArrayList<Item> items = new ArrayList<>(inventory.getItems());
-        items.forEach(item -> inventory.drop(item, room));
     }
 
     @Override
