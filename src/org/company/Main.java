@@ -36,24 +36,27 @@ public class Main {
                 Utility.SCANNER.nextLine();
             }
         }
-        System.out.println("class:\n1. rogue: glass shank and shabby jerkin\n2. warrior: rusted hatchet and shabby jerkin\n3. archer: crude bow and shabby jerkin");
-        Weapon weapon = WeaponInstance.glassShank();
+        System.out.println("class:\n1. rogue: glass shank (dagger)\n2. warrior: rusted hatchet (axe)\n3. archer: crude bow (bow)");
+        Weapon weapon;
         Clothing clothing = ClothingInstance.shabbyJerkin();
 
         while (true) {
             if (Utility.SCANNER.hasNextInt()) {
                 switch (Utility.SCANNER.nextInt()) {
+                    case 1:
+                        weapon = WeaponInstance.glassShank();
+                        System.out.printf("%s is rogue%n", name);
+                        break;
                     case 2:
                         weapon = WeaponInstance.rustedHatchet();
-                        clothing = ClothingInstance.shabbyJerkin();
                         System.out.printf("%s is warrior%n", name);
                         break;
                     case 3:
                         weapon = WeaponInstance.recurveBow();
-                        clothing = ClothingInstance.shabbyJerkin();
                         System.out.printf("%s is archer%n", name);
                         break;
                     default:
+                        weapon = WeaponInstance.glassShank();
                         System.out.println("the class is set to rogue as the hero did not write a valid number");
                         System.out.printf("%s is rogue%n", name);
                         break;
