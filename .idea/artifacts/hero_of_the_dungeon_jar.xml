@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="hero-of-the-dungeon:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/hero_of_the_dungeon_jar</output-path>
-    <root id="archive" name="hero-of-the-dungeon.jar">
-      <element id="module-output" name="hero-of-the-dungeon" />
-    </root>
-  </artifact>
-</component>
